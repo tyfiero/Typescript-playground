@@ -1,11 +1,29 @@
 import React from "react";
-import { Sandpack } from "@codesandbox/sandpack-react";
+import {
+  SandpackProvider,
+  SandpackCodeEditor,
+  SandpackPreview,
+} from "@codesandbox/sandpack-react";
 
 type Props = {};
 const code: string = `export default function App() {
     return <h1>Hello Sandpack</h1>
   }`;
-
+const files = {
+  "/App.js": `
+  import React from 'react';
+  function App() {
+    const [count, setCount] = React.useState(0);
+    
+    return (
+      <button onClick={() => setCount(count + 1)}>
+        Count: {count}
+      </button>
+    );
+  }
+  export default App;
+    `,
+};
 const theme = {
   colors: {
     surface1: "#2b3935",
@@ -43,7 +61,7 @@ const theme = {
 export default function IDE({}: Props) {
   return (
     <div className="w-full h-screen">
-      <Sandpack
+      <SandpackProvider
         theme={theme}
         template="vanilla-ts"
         // files={{
@@ -61,7 +79,12 @@ export default function IDE({}: Props) {
           //   visibleFiles: ["/App.js", "/button.js", "/index.js"],
           //   activeFile: "/index.ts",
         }}
-      />
+      >
+        <div className="w-1/2 h-full bg-red-500">
+          <SandpackCodeEditor />
+          <SandpackPreview />
+        </div>
+      </SandpackProvider>
     </div>
   );
 }
