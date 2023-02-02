@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { BsSun, BsMoon } from "react-icons/bs";
 import { useTheme } from "next-themes";
 import { FaRegUser } from "react-icons/fa";
-import { TbHome2 } from "react-icons/tb";
+import { TbCode, TbHome2 } from "react-icons/tb";
 import Image from "next/image";
 
 function Navbar() {
@@ -158,6 +158,32 @@ function Navbar() {
                       <TbHome2 className="scale-110 fade-effect-quick" />
                     )}
                     Home
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/IDE">
+                  <a
+                    className={
+                      " fade-m2  flex gap-2 items-center " +
+                      (selected === "IDE"
+                        ? " bg-blue-500 font-bold sm:text-3xl md:text-xl rounded-2xl text-white px-2 py-1"
+                        : " md:hover:text-gray-500 sm:text-3xl md:text-base sm:text-blue-900 md:text-gray-400 dark:text-blue-50 ")
+                    }
+                    href="#"
+                    onClick={() => {
+                      if (isToggled && isMobile) {
+                        setIsToggled(false);
+                      }
+                      if (selected !== "IDE") {
+                        setSelected("IDE");
+                      }
+                    }}
+                  >
+                    {selected === "IDE" && (
+                      <TbCode className="fade-effect-quick" />
+                    )}
+                    IDE
                   </a>
                 </Link>
               </li>
